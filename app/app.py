@@ -1,5 +1,7 @@
 # coding: utf-8
 
+from datetime import datetime
+
 import bottle
 
 content = """
@@ -38,8 +40,20 @@ Do souboru <code>/srv/app/init.sh</code> můžete napsat příkazy, které se ma
 </html>
 """
 
+
 @bottle.route('/')
 def home():
     return content
+
+
+@bottle.route('/date')
+def date():
+    return datetime.now().strftime('%x')
+
+
+@bottle.route('/time')
+def time():
+    return datetime.now().strftime('%X')
+
 
 application = bottle.default_app()
