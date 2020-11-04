@@ -1,9 +1,9 @@
 from datetime import datetime
 
-import bottle
+from bottle import route, default_app
 
 
-@bottle.route('/')
+@route('/')
 def home():
     return """
     <p>
@@ -18,19 +18,19 @@ def home():
     """
 
 
-@bottle.route('/date')
+@route('/date')
 def date():
     return f'<h1>{datetime.now().strftime("%x")}</h1>'
 
 
-@bottle.route('/time')
+@route('/time')
 def time():
     return f'<h1>{datetime.now().strftime("%X")}</h1>'
 
 
-@bottle.route('/date_time')
+@route('/date_time')
 def date_time():
     return f'<h1>{datetime.now().strftime("%c")}</h1>'
 
 
-application = bottle.default_app()
+application = default_app()
