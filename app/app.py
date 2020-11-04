@@ -1,5 +1,3 @@
-# coding: utf-8
-
 from datetime import datetime
 
 import bottle
@@ -8,9 +6,15 @@ import bottle
 @bottle.route('/')
 def home():
     return """
+    <p>
     <a href="date">date</a>
+    </p>
+    <p>
     <a href="time">time</a>
+    </p>
+    <p>
     <a href="date_time">date & time</a>
+    </p>
     """
 
 
