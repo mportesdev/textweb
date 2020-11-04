@@ -23,4 +23,9 @@ def time():
     return datetime.now().strftime('%X')
 
 
+@bottle.route('/date_time')
+def date_time():
+    return datetime.now().strftime('%c')
+
+
 application = bottle.default_app()
