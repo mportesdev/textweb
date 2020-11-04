@@ -18,31 +18,15 @@ def home():
     '''
 
 
-@route('/date')
-def date():
-    return f'''
-        <h1>
-            {datetime.now().strftime("%x")}
-        </h1>
-    '''
-
-
-@route('/time')
-def time():
-    return f'''
-        <h1>
-            {datetime.now().strftime("%X")}
-        </h1>
-    '''
-
-
-@route('/date_time')
-def date_time():
-    return f'''
-        <h1>
-            {datetime.now().strftime("%c")}
-        </h1>
-    '''
+@route('/<name:re:date|time|date_time>')
+def date_time(name):
+    format_spec = {
+        'date': '%x',
+        'time': '%X',
+        'date_time': '%c',
+    }.get(name)
+    text = datetime.now().strftime(format_spec)
+    return f'<h1>{text}</h1>'
 
 
 application = default_app()
