@@ -7,13 +7,13 @@ from bottle import route, default_app
 def home():
     return '''
         <p>
-            <a href="date">date</a>
+            <a href="/date">date</a>
         </p>
         <p>
-            <a href="time">time</a>
+            <a href="/time">time</a>
         </p>
         <p>
-            <a href="date_time">date & time</a>
+            <a href="/date_time">date & time</a>
         </p>
     '''
 
@@ -26,7 +26,8 @@ def date_time(name):
         'date_time': '%-d. %-m. %Y, %-H:%M:%S',
     }.get(name)
     text = datetime.now().strftime(format_spec)
-    return f'<h1>{text}</h1>'
+    return f'<h1>{text}</h1>' \
+           f'<a href="/">home</a>'
 
 
 application = default_app()
