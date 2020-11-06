@@ -1,6 +1,6 @@
 from datetime import datetime
 
-from bottle import Bottle, request, template
+from bottle import Bottle, request, view
 
 application = Bottle()
 
@@ -24,6 +24,7 @@ def home():
 
 
 @application.route('/<name:re:date|time|date_time>')
+@view('simple')
 def date_time(name):
     format_spec = {
         'date': '%-d. %-m. %Y',
@@ -31,11 +32,11 @@ def date_time(name):
         'date_time': '%-d. %-m. %Y, %-H:%M:%S',
     }.get(name)
     text = datetime.now().strftime(format_spec)
-    return template('simple', text=text)
+    return {'text': text}
 
 
 @application.route('/ip')
+@view('simple')
 def ip():
     text = request.get('REMOTE_ADDR')
-    return f'<h1>{text}</h1>' \
-           f'<a href="/">home</a>'
+    return {'text': text}
