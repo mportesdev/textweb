@@ -31,7 +31,7 @@ def date_time(name):
         'date_time': '%-d. %-m. %Y, %-H:%M:%S',
     }.get(name)
     text = datetime.now().strftime(format_spec)
-    return template(text= text)
+    return template('simple', text=text)
 
 
 @application.route('/ip')
