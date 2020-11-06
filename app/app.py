@@ -1,6 +1,6 @@
 from datetime import datetime
 
-from bottle import Bottle, request
+from bottle import Bottle, request, template
 
 application = Bottle()
 
@@ -31,8 +31,7 @@ def date_time(name):
         'date_time': '%-d. %-m. %Y, %-H:%M:%S',
     }.get(name)
     text = datetime.now().strftime(format_spec)
-    return f'<h1>{text}</h1>' \
-           f'<a href="/">home</a>'
+    return template(text= text)
 
 
 @application.route('/ip')
