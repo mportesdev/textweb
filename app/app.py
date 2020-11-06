@@ -1,6 +1,6 @@
 from datetime import datetime
 
-from bottle import Bottle
+from bottle import Bottle, request
 
 application = Bottle()
 
@@ -17,6 +17,9 @@ def home():
         <p>
             <a href="/date_time">date & time</a>
         </p>
+        <p>
+            <a href="/ip">IP address</a>
+        </p>
     '''
 
 
@@ -28,5 +31,12 @@ def date_time(name):
         'date_time': '%-d. %-m. %Y, %-H:%M:%S',
     }.get(name)
     text = datetime.now().strftime(format_spec)
+    return f'<h1>{text}</h1>' \
+           f'<a href="/">home</a>'
+
+
+@application.route('/ip')
+def ip():
+    text = request.get('REMOTE_ADDR')
     return f'<h1>{text}</h1>' \
            f'<a href="/">home</a>'
