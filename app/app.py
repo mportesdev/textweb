@@ -49,4 +49,4 @@ def oli_picture(picture_id):
         1: 'orange.png',
         2: 'blue.png',
     }.get(picture_id, '')
-    return static_file(filename=filename, root='/static')
+    return static_file(filename=filename, root='static')
