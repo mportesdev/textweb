@@ -1,5 +1,7 @@
 from bottle import Bottle, view, static_file
 
+import app_data
+
 application = Bottle()
 
 
@@ -37,8 +39,7 @@ def oli_picture(picture_id):
 def oli_meter():
     title = 'Oli roste'
     data = [
-        {'date': '20180101', 'value': 804},
-        {'date': '20190101', 'value': 958},
-        {'date': '20200101', 'value': 1041},
+        {'date': item['date'], 'value': item['value']}
+        for item in app_data.OLI_METER_DATA
     ]
     return {'title': title, 'data': data}
