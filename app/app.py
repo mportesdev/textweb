@@ -28,16 +28,15 @@ def home_icon():
 @view('gallery')
 def oli_gallery():
     title = 'Oli maluje'
-    pictures = [0, 1, 2]
+    pictures = [0, 1]
     return {'title': title, 'pictures': pictures}
 
 
 @application.route('/oli/maluje/<picture_id:int>')
 def oli_picture(picture_id):
     filename = {
-        0: 'green.png',
-        1: 'orange.png',
-        2: 'blue.png',
+        0: 'doubledecker.jpg',
+        1: 'ducks.jpg',
     }.get(picture_id, '')
     return static_file(filename=filename, root='static')
 
