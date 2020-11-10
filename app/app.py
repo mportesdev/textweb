@@ -14,6 +14,7 @@ def home():
     items = [
         {'url': '/oli/maluje', 'text': 'Oli maluje'},
         {'url': '/oli/roste', 'text': 'Oli roste'},
+        {'url': '/fanda/roste', 'text': 'Fanda roste'},
     ]
     return {'title': title, 'items': items}
 
@@ -36,9 +37,9 @@ def oli_picture(picture_id):
     return static_file(filename=filename, root='static')
 
 
-@application.route('/oli/roste')
+@application.route('/<name>/roste')
 @view('meter')
-def oli_meter():
+def meter(name):
     def format_item(item):
         date, value = item['date'], item['value']
         date_str = datetime.strptime(date, '%Y%m%d').strftime('%-d. %-m. %Y')
@@ -46,5 +47,5 @@ def oli_meter():
         return {'date': date_str, 'value': value_str}
 
     title = 'Oli roste'
-    data = [format_item(item) for item in app_data.METER_DATA['oli']]
+    data = [format_item(item) for item in app_data.METER_DATA[name]]
     return {'title': title, 'data': data}
