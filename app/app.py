@@ -1,5 +1,3 @@
-from datetime import datetime
-
 from bottle import Bottle, view, static_file
 
 application = Bottle()
@@ -10,25 +8,9 @@ application = Bottle()
 def home():
     title = 'Home'
     items = [
-        {'url': '/date', 'text': 'date'},
-        {'url': '/time', 'text': 'time'},
-        {'url': '/date_time', 'text': 'date & time'},
         {'url': '/oli/obrazky', 'text': 'Oli maluje'},
     ]
     return {'title': title, 'items': items}
-
-
-@application.route('/<name:re:date|time|date_time>')
-@view('simple')
-def date_time(name):
-    title = name.replace('_', ' & ').title()
-    format_spec = {
-        'date': '%-d. %-m. %Y',
-        'time': '%-H:%M:%S',
-        'date_time': '%-d. %-m. %Y, %-H:%M:%S',
-    }.get(name)
-    text = datetime.now().strftime(format_spec)
-    return {'title': title, 'text': text}
 
 
 @application.route('/oli/obrazky')
