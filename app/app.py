@@ -8,12 +8,12 @@ application = Bottle()
 def home():
     title = 'Home'
     items = [
-        {'url': '/oli/obrazky', 'text': 'Oli maluje'},
+        {'url': '/oli/maluje', 'text': 'Oli maluje'},
     ]
     return {'title': title, 'items': items}
 
 
-@application.route('/oli/obrazky')
+@application.route('/oli/maluje')
 @view('gallery')
 def oli_gallery():
     title = 'Oli maluje'
@@ -21,7 +21,7 @@ def oli_gallery():
     return {'title': title, 'pictures': pictures}
 
 
-@application.route('/oli/obrazky/<picture_id:int>')
+@application.route('/oli/maluje/<picture_id:int>')
 def oli_picture(picture_id):
     filename = {
         0: 'green.png',
