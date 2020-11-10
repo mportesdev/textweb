@@ -1,5 +1,7 @@
 %for picture in pictures:
     <p>
-      <img src="/oli/obrazky/{{picture}}" />
+      <a href="/oli/obrazky/{{picture}}">
+        <img src="/oli/obrazky/{{picture}}" />
+      </a>
     </p>
 %end
