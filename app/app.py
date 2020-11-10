@@ -9,6 +9,7 @@ def home():
     title = 'Home'
     items = [
         {'url': '/oli/maluje', 'text': 'Oli maluje'},
+        {'url': '/oli/roste', 'text': 'Oli roste'},
     ]
     return {'title': title, 'items': items}
 
@@ -29,3 +30,15 @@ def oli_picture(picture_id):
         2: 'blue.png',
     }.get(picture_id, '')
     return static_file(filename=filename, root='static')
+
+
+@application.route('/oli/roste')
+@view('meter')
+def oli_meter():
+    title = 'Oli roste'
+    data = [
+        {'date': '20180101', 'value': 804},
+        {'date': '20190101', 'value': 958},
+        {'date': '20200101', 'value': 1041},
+    ]
+    return {'title': title, 'data': data}
