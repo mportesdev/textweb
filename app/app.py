@@ -19,6 +19,11 @@ def home():
     return {'title': title, 'items': items}
 
 
+@application.route('/home_icon')
+def home_icon():
+    return static_file(filename='home32.png', root='static')
+
+
 @application.route('/oli/maluje')
 @view('gallery')
 def oli_gallery():
