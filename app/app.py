@@ -46,5 +46,5 @@ def oli_meter():
         return {'date': date_str, 'value': value_str}
 
     title = 'Oli roste'
-    data = [format_item(item) for item in app_data.OLI_METER_DATA]
+    data = [format_item(item) for item in app_data.METER_DATA['oli']]
     return {'title': title, 'data': data}
