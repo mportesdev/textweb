@@ -1,3 +1,5 @@
+from datetime import datetime
+
 from bottle import Bottle, view, static_file
 
 import app_data
@@ -37,9 +39,12 @@ def oli_picture(picture_id):
 @application.route('/oli/roste')
 @view('meter')
 def oli_meter():
+    def format_item(item):
+        date, value = item['date'], item['value']
+        date_str = datetime.strptime(date, '%Y%m%d').strftime('%-d. %-m. %Y')
+        value_str = f'{value / 10:.1f} cm'
+        return {'date': date_str, 'value': value_str}
+
     title = 'Oli roste'
-    data = [
-        {'date': item['date'], 'value': item['value']}
-        for item in app_data.OLI_METER_DATA
-    ]
+    data = [format_item(item) for item in app_data.OLI_METER_DATA]
     return {'title': title, 'data': data}

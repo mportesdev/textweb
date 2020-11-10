@@ -1,6 +1,13 @@
 %rebase base.html title=title
+<table border="1">
 %for item in data:
-    <p>
-        {{item['date']}}: {{item['value'] / 10}}
-    </p>
+    <tr>
+        <td align="right">
+            {{item['date']}}
+        </td>
+        <td align="right">
+            <b>{{item['value']}}</b>
+        </td>
+    </tr>
 %end
+</table>
