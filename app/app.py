@@ -34,10 +34,7 @@ def oli_gallery():
 
 @application.route('/oli/maluje/<picture_id:int>')
 def oli_picture(picture_id):
-    filename = {
-        0: 'doubledecker.jpg',
-        1: 'ducks.jpg',
-    }.get(picture_id, '')
+    filename = app_data.PICTURE_IDS.get(picture_id, '')
     return static_file(filename=filename, root='static')
 
 

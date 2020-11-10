@@ -1,3 +1,8 @@
+PICTURE_IDS = {
+    0: 'doubledecker.jpg',
+    1: 'ducks.jpg',
+}
+
 METER_DATA = {
     'oli': [
         {
