@@ -36,7 +36,7 @@ def date_time(name):
 
 
 @application.route('/oli/obrazky')
-@view('pictures')
+@view('gallery')
 def oli_gallery():
     pictures = [0, 1, 2]
     return {'pictures': pictures}
