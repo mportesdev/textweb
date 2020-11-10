@@ -6,21 +6,16 @@ application = Bottle()
 
 
 @application.route('/')
+@view('menu')
 def home():
-    return '''
-        <p>
-            <a href="/date">date</a>
-        </p>
-        <p>
-            <a href="/time">time</a>
-        </p>
-        <p>
-            <a href="/date_time">date & time</a>
-        </p>
-        <p>
-            <a href="/oli/obrazky">Oli maluje</a>
-        </p>
-    '''
+    title = 'Home'
+    items = [
+        {'url': '/date', 'text': 'date'},
+        {'url': '/time', 'text': 'time'},
+        {'url': '/date_time', 'text': 'date & time'},
+        {'url': '/oli/obrazky', 'text': 'Oli maluje'},
+    ]
+    return {'title': title, 'items': items}
 
 
 @application.route('/<name:re:date|time|date_time>')
