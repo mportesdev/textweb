@@ -1,6 +1,8 @@
 %rebase base.html title=title
 %for item in items:
-    <p>
-      <a href="{{item['url']}}">{{item['text']}}</a>
-    </p>
+    %if item['display']:
+        <p>
+          <a href="{{item['url']}}">{{item['text']}}</a>
+        </p>
+    %end
 %end
