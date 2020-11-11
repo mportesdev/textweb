@@ -4,14 +4,14 @@ HOMEPAGE_MENU = [
     {'url': '/fanda/roste', 'text': 'Fanda roste'},
 ]
 
-PICTURE_IDS = {
-    'oli': {
-        0: 'doubledecker.jpg',
-        1: 'ducks.jpg',
-    },
+PICTURE_FILES = {
+    'oli': [
+        'doubledecker.jpg',
+        'ducks.jpg',
+    ],
 
-    'fanda': {
-    },
+    'fanda': [
+    ],
 }
 
 METER_DATA = {
