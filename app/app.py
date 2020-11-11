@@ -1,7 +1,7 @@
 from datetime import datetime
 from pathlib import Path
 
-from bottle import Bottle, view, static_file
+from bottle import Bottle, view, static_file, HTTPError
 from PIL import Image
 
 from app_data import HOMEPAGE_MENU, PICTURE_FILES, METER_DATA
@@ -33,13 +33,21 @@ def oli_gallery():
 
 @application.route('/oli/maluje/<picture_id:int>')
 def oli_picture(picture_id):
-    filename = PICTURE_FILES['oli'][picture_id]
+    try:
+        filename = PICTURE_FILES['oli'][picture_id]
+    except (KeyError, IndexError):
+        raise HTTPError(404, 'File does not exist.')
+
     return static_file(filename=filename, root=STATIC_PATH)
 
 
 @application.route('/oli/nahled/<picture_id:int>')
 def oli_thumbnail(picture_id):
-    filename = PICTURE_FILES['oli'][picture_id]
+    try:
+        filename = PICTURE_FILES['oli'][picture_id]
+    except (KeyError, IndexError):
+        raise HTTPError(404, 'File does not exist.')
+
     thumb_path = get_thumbnail(STATIC_PATH / filename)
     return static_file(filename=thumb_path.name, root=STATIC_PATH)
 
