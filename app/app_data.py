@@ -5,8 +5,13 @@ HOMEPAGE_MENU = [
 ]
 
 PICTURE_IDS = {
-    0: 'doubledecker.jpg',
-    1: 'ducks.jpg',
+    'oli': {
+        0: 'doubledecker.jpg',
+        1: 'ducks.jpg',
+    },
+
+    'fanda': {
+    },
 }
 
 METER_DATA = {
@@ -64,6 +69,7 @@ METER_DATA = {
             'value': 1121
         },
     ],
+
     'fanda': [
         {
             'date': '20200630',

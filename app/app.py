@@ -33,13 +33,13 @@ def oli_gallery():
 
 @application.route('/oli/maluje/<picture_id:int>')
 def oli_picture(picture_id):
-    filename = PICTURE_IDS.get(picture_id, '')
+    filename = PICTURE_IDS['oli'].get(picture_id, '')
     return static_file(filename=filename, root=STATIC_PATH)
 
 
 @application.route('/oli/nahled/<picture_id:int>')
 def oli_thumbnail(picture_id):
-    filename = PICTURE_IDS.get(picture_id, '')
+    filename = PICTURE_IDS['oli'].get(picture_id, '')
     thumb_path = get_thumbnail(STATIC_PATH / filename)
     return static_file(filename=thumb_path.name, root=STATIC_PATH)
 
