@@ -4,7 +4,7 @@ from pathlib import Path
 from bottle import Bottle, view, static_file
 from PIL import Image
 
-import app_data
+from app_data import PICTURE_IDS, METER_DATA
 
 STATIC_PATH = Path(__file__).resolve().parent / 'static'
 
@@ -38,13 +38,13 @@ def oli_gallery():
 
 @application.route('/oli/maluje/<picture_id:int>')
 def oli_picture(picture_id):
-    filename = app_data.PICTURE_IDS.get(picture_id, '')
+    filename = PICTURE_IDS.get(picture_id, '')
     return static_file(filename=filename, root=STATIC_PATH)
 
 
 @application.route('/oli/nahled/<picture_id:int>')
 def oli_thumbnail(picture_id):
-    filename = app_data.PICTURE_IDS.get(picture_id, '')
+    filename = PICTURE_IDS.get(picture_id, '')
     thumb_path = get_thumbnail(STATIC_PATH / filename)
     return static_file(filename=thumb_path.name, root=STATIC_PATH)
 
@@ -71,5 +71,5 @@ def meter(name):
         return {'date': date_str, 'value': value_str}
 
     title = 'Oli roste'
-    data = [format_item(item) for item in app_data.METER_DATA[name]]
+    data = [format_item(item) for item in METER_DATA[name]]
     return {'title': title, 'data': data}
