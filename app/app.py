@@ -1,6 +1,8 @@
 from datetime import datetime
+from pathlib import Path
 
 from bottle import Bottle, view, static_file
+from PIL import Image
 
 import app_data
 
@@ -38,9 +40,28 @@ def oli_picture(picture_id):
     return static_file(filename=filename, root='static')
 
 
+@application.route('/oli/nahled/<picture_id:int>')
+def oli_thumbnail(picture_id):
+    filename = app_data.PICTURE_IDS.get(picture_id, '')
+    thumb_path = get_thumbnail(Path('static') / filename)
+    return static_file(filename=thumb_path.name, root='static')
+
+
+def get_thumbnail(pic_path, thumb_width=400):
+    thumb_path = pic_path.with_name(pic_path.stem + '_thumb' + pic_path.suffix)
+
+    if not thumb_path.exists():
+        img = Image.open(pic_path)
+        thumb = img.resize((thumb_width, thumb_width * img.height // img.width))
+        thumb.save(thumb_path)
+
+    return thumb_path
+
+
 @application.route('/<name>/roste')
 @view('meter')
 def meter(name):
+
     def format_item(item):
         date, value = item['date'], item['value']
         date_str = datetime.strptime(date, '%Y%m%d').strftime('%-d. %-m. %Y')
