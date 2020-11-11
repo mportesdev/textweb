@@ -1,3 +1,9 @@
+HOMEPAGE_MENU = [
+    {'url': '/oli/maluje', 'text': 'Oli maluje'},
+    {'url': '/oli/roste', 'text': 'Oli roste'},
+    {'url': '/fanda/roste', 'text': 'Fanda roste'},
+]
+
 PICTURE_IDS = {
     0: 'doubledecker.jpg',
     1: 'ducks.jpg',

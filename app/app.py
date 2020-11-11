@@ -4,7 +4,7 @@ from pathlib import Path
 from bottle import Bottle, view, static_file
 from PIL import Image
 
-from app_data import PICTURE_IDS, METER_DATA
+from app_data import HOMEPAGE_MENU, PICTURE_IDS, METER_DATA
 
 STATIC_PATH = Path(__file__).resolve().parent / 'static'
 
@@ -15,12 +15,7 @@ application = Bottle()
 @view('menu')
 def home():
     title = 'Home'
-    items = [
-        {'url': '/oli/maluje', 'text': 'Oli maluje'},
-        {'url': '/oli/roste', 'text': 'Oli roste'},
-        {'url': '/fanda/roste', 'text': 'Fanda roste'},
-    ]
-    return {'title': title, 'items': items}
+    return {'title': title, 'items': HOMEPAGE_MENU}
 
 
 @application.route('/home_icon')
