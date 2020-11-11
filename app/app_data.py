@@ -1,5 +1,6 @@
 HOMEPAGE_MENU = [
     {'url': '/oli/maluje', 'text': 'Oli maluje'},
+    {'url': '/fanda/maluje', 'text': 'Fanda maluje'},
     {'url': '/oli/roste', 'text': 'Oli roste'},
     {'url': '/fanda/roste', 'text': 'Fanda roste'},
 ]

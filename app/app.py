@@ -23,28 +23,28 @@ def home_icon():
     return static_file(filename='home32.png', root=STATIC_PATH)
 
 
-@application.route('/oli/maluje')
+@application.route('/<name>/maluje')
 @view('gallery')
-def oli_gallery():
+def oli_gallery(name):
     title = 'Oli maluje'
-    pictures = [0, 1]
+    pictures = range(len(PICTURE_FILES[name]))
     return {'title': title, 'pictures': pictures}
 
 
-@application.route('/oli/maluje/<picture_id:int>')
-def oli_picture(picture_id):
+@application.route('/<name>/maluje/<picture_id:int>')
+def oli_picture(name, picture_id):
     try:
-        filename = PICTURE_FILES['oli'][picture_id]
+        filename = PICTURE_FILES[name][picture_id]
     except (KeyError, IndexError):
         raise HTTPError(404, 'File does not exist.')
 
     return static_file(filename=filename, root=STATIC_PATH)
 
 
-@application.route('/oli/nahled/<picture_id:int>')
-def oli_thumbnail(picture_id):
+@application.route('/<name>/nahled/<picture_id:int>')
+def oli_thumbnail(name, picture_id):
     try:
-        filename = PICTURE_FILES['oli'][picture_id]
+        filename = PICTURE_FILES[name][picture_id]
     except (KeyError, IndexError):
         raise HTTPError(404, 'File does not exist.')
 
