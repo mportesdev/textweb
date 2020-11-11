@@ -26,7 +26,7 @@ def home_icon():
 @application.route('/<name>/maluje')
 @view('gallery')
 def oli_gallery(name):
-    title = 'Oli maluje'
+    title = f'{name.title()} maluje'
     pictures = range(len(PICTURE_FILES[name]))
     return {'title': title, 'pictures': pictures}
 
@@ -73,6 +73,6 @@ def meter(name):
         value_str = f'{value / 10:.1f} cm'
         return {'date': date_str, 'value': value_str}
 
-    title = 'Oli roste'
+    title = f'{name.title()} roste'
     data = [format_item(item) for item in METER_DATA[name]]
     return {'title': title, 'data': data}
