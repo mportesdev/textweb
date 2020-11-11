@@ -6,6 +6,8 @@ from PIL import Image
 
 import app_data
 
+STATIC_PATH = Path(__file__).resolve().parent / 'static'
+
 application = Bottle()
 
 
@@ -23,7 +25,7 @@ def home():
 
 @application.route('/home_icon')
 def home_icon():
-    return static_file(filename='home32.png', root='static')
+    return static_file(filename='home32.png', root=STATIC_PATH)
 
 
 @application.route('/oli/maluje')
@@ -37,14 +39,14 @@ def oli_gallery():
 @application.route('/oli/maluje/<picture_id:int>')
 def oli_picture(picture_id):
     filename = app_data.PICTURE_IDS.get(picture_id, '')
-    return static_file(filename=filename, root='static')
+    return static_file(filename=filename, root=STATIC_PATH)
 
 
 @application.route('/oli/nahled/<picture_id:int>')
 def oli_thumbnail(picture_id):
     filename = app_data.PICTURE_IDS.get(picture_id, '')
-    thumb_path = get_thumbnail(Path('static') / filename)
-    return static_file(filename=thumb_path.name, root='static')
+    thumb_path = get_thumbnail(STATIC_PATH / filename)
+    return static_file(filename=thumb_path.name, root=STATIC_PATH)
 
 
 def get_thumbnail(pic_path, thumb_width=400):
