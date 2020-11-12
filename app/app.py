@@ -20,7 +20,7 @@ def home():
 
 @application.route('/home_icon')
 def home_icon():
-    return static_file(filename='home32.png', root=STATIC_PATH)
+    return static_file(filename='home64.png', root=STATIC_PATH)
 
 
 @application.route('/style')

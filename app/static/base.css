@@ -1,4 +1,5 @@
 body {
+    text-align: Center;
     font-size: 20pt;
     color: Teal;
     background-color: Pink;
@@ -10,9 +11,14 @@ a {
     color: Teal;
 }
 
+table {
+    margin: Auto;
+    text-align: Right;
+    border-collapse: Collapse;
+}
+
 td {
     border-style: Solid;
     border-width: 1px;
     padding: 6px;
-    text-align: right;
 }
