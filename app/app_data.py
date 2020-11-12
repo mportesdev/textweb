@@ -2,6 +2,8 @@ PICTURE_FILES = {
     'oli': [
         'doubledecker.jpg',
         'ducks.jpg',
+        'bear.jpg',
+        'face.jpg',
     ],
 
     'fanda': [
