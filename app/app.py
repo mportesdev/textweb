@@ -23,6 +23,11 @@ def home_icon():
     return static_file(filename='home32.png', root=STATIC_PATH)
 
 
+@application.route('/style')
+def style():
+    return static_file(filename='base.css', root=STATIC_PATH)
+
+
 @application.route('/<name>/maluje')
 @view('gallery')
 def oli_gallery(name):

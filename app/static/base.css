@@ -1,0 +1,18 @@
+body {
+    font-size: 20pt;
+    color: Teal;
+    background-color: Pink;
+}
+
+a {
+    font-weight: Bold;
+    text-decoration: None;
+    color: Teal;
+}
+
+td {
+    border-style: Solid;
+    border-width: 1px;
+    padding: 6px;
+    text-align: right;
+}
