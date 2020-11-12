@@ -52,12 +52,17 @@ def oli_thumbnail(name, picture_id):
     return static_file(filename=thumb_path.name, root=STATIC_PATH)
 
 
-def get_thumbnail(pic_path, thumb_width=400):
+def get_thumbnail(pic_path, long_side=400):
     thumb_path = pic_path.with_name(pic_path.stem + '_thumb' + pic_path.suffix)
 
     if not thumb_path.exists():
         img = Image.open(pic_path)
-        thumb = img.resize((thumb_width, thumb_width * img.height // img.width))
+        w = img.width
+        h = img.height
+        if w > h:
+            thumb = img.resize((long_side, long_side * h // w))
+        else:
+            thumb = img.resize((long_side * w // h, long_side))
         thumb.save(thumb_path)
 
     return thumb_path
