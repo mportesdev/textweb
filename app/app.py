@@ -30,14 +30,14 @@ def style():
 
 @application.route('/<name>/maluje')
 @view('gallery')
-def oli_gallery(name):
+def gallery(name):
     title = f'{name.title()} maluje'
     pictures = range(len(PICTURE_FILES[name]))
     return {'title': title, 'pictures': pictures}
 
 
 @application.route('/<name>/maluje/<picture_id:int>')
-def oli_picture(name, picture_id):
+def picture(name, picture_id):
     try:
         filename = PICTURE_FILES[name][picture_id]
     except (KeyError, IndexError):
@@ -47,7 +47,7 @@ def oli_picture(name, picture_id):
 
 
 @application.route('/<name>/nahled/<picture_id:int>')
-def oli_thumbnail(name, picture_id):
+def thumbnail(name, picture_id):
     try:
         filename = PICTURE_FILES[name][picture_id]
     except (KeyError, IndexError):
