@@ -1,16 +1,17 @@
-PICTURE_FILES = {
-    'oli': [
-        'ski.jpg',
-        'doubledecker.jpg',
-        'ducks.jpg',
-        'bear.jpg',
-        'face.jpg',
-        'bike.jpg',
-        'weather.jpg',
-    ],
+from app_paths import IMG_PATH
 
-    'fanda': [
-    ],
+
+def jpg_pictures(author):
+    return [
+        path.name
+        for path in (IMG_PATH / author).glob('*.jpg')
+        if '_thumb' not in path.name
+    ]
+
+
+PICTURE_FILES = {
+    author: jpg_pictures(author)
+    for author in ('oli', 'fanda')
 }
 
 METER_DATA = {

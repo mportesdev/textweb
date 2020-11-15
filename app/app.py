@@ -1,13 +1,10 @@
 from datetime import datetime
-from pathlib import Path
 
 from bottle import Bottle, view, static_file, HTTPError
 from PIL import Image
 
 from app_data import HOMEPAGE_MENU, PICTURE_FILES, METER_DATA
-
-STATIC_PATH = Path(__file__).resolve().parent / 'static'
-IMG_PATH = STATIC_PATH / 'img'
+from app_paths import STATIC_PATH, IMG_PATH
 
 application = Bottle()
 
@@ -33,8 +30,8 @@ def style():
 @view('gallery')
 def gallery(name):
     title = f'{name.title()} maluje'
-    pictures = range(len(PICTURE_FILES[name]))
-    return {'title': title, 'name': name, 'pictures': pictures}
+    picture_ids = range(len(PICTURE_FILES[name]))
+    return {'title': title, 'name': name, 'pictures': picture_ids}
 
 
 @application.route('/<name>/maluje/<picture_id:int>')
