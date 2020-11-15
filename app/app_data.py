@@ -5,6 +5,8 @@ PICTURE_FILES = {
         'ducks.jpg',
         'bear.jpg',
         'face.jpg',
+        'bike.jpg',
+        'weather.jpg',
     ],
 
     'fanda': [
