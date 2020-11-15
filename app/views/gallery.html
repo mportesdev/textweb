@@ -1,8 +1,8 @@
 %rebase base.html title=title
-%for picture in pictures:
+%for picture_id in pictures:
     <p>
-      <a href="/oli/maluje/{{picture}}">
-        <img src="/oli/nahled/{{picture}}" />
+      <a href="/{{name}}/maluje/{{picture_id}}">
+        <img src="/{{name}}/nahled/{{picture_id}}" />
       </a>
     </p>
 %end

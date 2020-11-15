@@ -7,6 +7,7 @@ from PIL import Image
 from app_data import HOMEPAGE_MENU, PICTURE_FILES, METER_DATA
 
 STATIC_PATH = Path(__file__).resolve().parent / 'static'
+IMG_PATH = STATIC_PATH / 'img'
 
 application = Bottle()
 
@@ -33,7 +34,7 @@ def style():
 def gallery(name):
     title = f'{name.title()} maluje'
     pictures = range(len(PICTURE_FILES[name]))
-    return {'title': title, 'pictures': pictures}
+    return {'title': title, 'name': name, 'pictures': pictures}
 
 
 @application.route('/<name>/maluje/<picture_id:int>')
@@ -43,7 +44,7 @@ def picture(name, picture_id):
     except (KeyError, IndexError):
         raise HTTPError(404, 'File does not exist.')
 
-    return static_file(filename=filename, root=STATIC_PATH)
+    return static_file(filename=filename, root=IMG_PATH / name)
 
 
 @application.route('/<name>/nahled/<picture_id:int>')
@@ -53,8 +54,8 @@ def thumbnail(name, picture_id):
     except (KeyError, IndexError):
         raise HTTPError(404, 'File does not exist.')
 
-    thumb_path = get_thumbnail(STATIC_PATH / filename)
-    return static_file(filename=thumb_path.name, root=STATIC_PATH)
+    thumb_path = get_thumbnail(IMG_PATH / name / filename)
+    return static_file(filename=thumb_path.name, root=thumb_path.parent)
 
 
 def get_thumbnail(pic_path, long_side=400):
