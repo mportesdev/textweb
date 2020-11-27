@@ -1,8 +1,14 @@
 %rebase base.html title=title
-%for picture_id in pictures:
-    <p>
-      <a href="/{{name}}/maluje/{{picture_id}}">
-        <img src="/{{name}}/nahled/{{picture_id}}" />
-      </a>
-    </p>
-%end
+<div class="container">
+  <div class="row row-cols-2 align-items-center justify-content-center">
+
+    %for picture_id in pictures:
+      <p>
+        <a href="/{{name}}/maluje/{{picture_id}}">
+          <img src="/{{name}}/nahled/{{picture_id}}" class="rounded" />
+        </a>
+      </p>
+    %end
+
+  </div>
+</div>
