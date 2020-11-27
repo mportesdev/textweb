@@ -77,9 +77,9 @@ def meter(name):
 
     def format_item(item):
         date, value = item['date'], item['value']
-        date_str = datetime.strptime(date, '%Y%m%d').strftime('%-d. %-m. %Y')
-        value_str = f'{value / 10:.1f} cm'
-        return {'date': date_str, 'value': value_str}
+        parsed_date = datetime.strptime(date, '%Y%m%d')
+        return {'date': f'{parsed_date:%-d. %-m. %Y}',
+                'value': f'{value / 10:.1f} cm'}
 
     title = f'{name.title()} roste'
     data = [format_item(item) for item in METER_DATA[name]]
