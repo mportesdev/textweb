@@ -1,6 +1,7 @@
 from datetime import datetime
+import json
 
-from bottle import Bottle, view, static_file, HTTPError
+from bottle import Bottle, view, static_file, HTTPError, response
 from PIL import Image
 
 from app_data import HOMEPAGE_MENU, PICTURE_FILES
@@ -89,3 +90,10 @@ def meter(name):
 
 def meter_data(name):
     return sorted(get_meter_data(name), key=lambda entry: entry['date'])
+
+
+@application.route('/api/<name>/roste')
+def meter_api(name):
+    response.set_header('Content-Type', 'application/json')
+    data_for_name = list(get_meter_data(name))
+    return json.dumps(data_for_name)
