@@ -12,3 +12,11 @@ def get_meter_data(name):
         yield {'date': date, 'value': value}
 
     con.close()
+
+
+def entries_exist(table, name):
+    if table != 'meter':
+        return False
+
+    data_for_name = list(get_meter_data(name))
+    return len(data_for_name) > 0

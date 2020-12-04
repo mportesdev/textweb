@@ -1,4 +1,5 @@
 from app_paths import IMG_PATH
+from db_functions import entries_exist
 
 
 def jpg_pictures(author):
@@ -7,10 +8,6 @@ def jpg_pictures(author):
         for path in (IMG_PATH / author).glob('*.jpg')
         if '_thumb' not in path.name
     ]
-
-
-def entries_exist(table, name):
-    return len(METER_DATA[name]) != 0
 
 
 PICTURE_FILES = {
