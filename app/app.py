@@ -82,5 +82,9 @@ def meter(name):
                 'value': f'{value / 10:.1f} cm'}
 
     title = f'{name.title()} roste'
-    data = [format_item(item) for item in METER_DATA[name]]
+    data = [format_item(item) for item in meter_data(name)]
     return {'title': title, 'data': data}
+
+
+def meter_data(name):
+    return METER_DATA[name]

@@ -9,6 +9,10 @@ def jpg_pictures(author):
     ]
 
 
+def entries_exist(table, name):
+    return len(METER_DATA[name]) != 0
+
+
 PICTURE_FILES = {
     author: jpg_pictures(author)
     for author in ('oli', 'fanda')
@@ -100,11 +104,11 @@ HOMEPAGE_MENU = [
     {
         'url': '/oli/roste',
         'text': 'Oli roste',
-        'display': bool(METER_DATA['oli']),
+        'display': entries_exist('meter', 'oli'),
     },
     {
         'url': '/fanda/roste',
         'text': 'Fanda roste',
-        'display': bool(METER_DATA['fanda']),
+        'display': entries_exist('meter', 'fanda'),
     },
 ]
