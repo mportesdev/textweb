@@ -3,8 +3,9 @@ from datetime import datetime
 from bottle import Bottle, view, static_file, HTTPError
 from PIL import Image
 
-from app_data import HOMEPAGE_MENU, PICTURE_FILES, METER_DATA
+from app_data import HOMEPAGE_MENU, PICTURE_FILES
 from app_paths import STATIC_PATH, IMG_PATH
+from db_functions import get_meter_data
 
 application = Bottle()
 
@@ -87,4 +88,4 @@ def meter(name):
 
 
 def meter_data(name):
-    return METER_DATA[name]
+    return sorted(get_meter_data(name), key=lambda entry: entry['date'])
