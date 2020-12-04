@@ -95,5 +95,4 @@ def meter_data(name):
 @application.route('/api/<name>/roste')
 def meter_api(name):
     response.set_header('Content-Type', 'application/json')
-    data_for_name = list(get_meter_data(name))
-    return json.dumps(data_for_name)
+    return json.dumps(meter_data(name))
