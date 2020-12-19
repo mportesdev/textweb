@@ -61,14 +61,9 @@ def get_thumbnail(pic_path, long_side=400):
     thumb_path = pic_path.with_name(pic_path.stem + '_thumb' + pic_path.suffix)
 
     if not thumb_path.exists():
-        img = Image.open(pic_path)
-        w = img.width
-        h = img.height
-        if w > h:
-            thumb = img.resize((long_side, long_side * h // w))
-        else:
-            thumb = img.resize((long_side * w // h, long_side))
-        thumb.save(thumb_path)
+        with Image.open(pic_path) as img:
+            img.thumbnail((long_side, long_side))
+            img.save(thumb_path)
 
     return thumb_path
 
