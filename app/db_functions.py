@@ -5,11 +5,10 @@ from app_paths import DB_PATH
 
 def get_meter_data(name):
     con = sqlite3.connect(DB_PATH)
-    cur = con.cursor()
+    con.row_factory = sqlite3.Row
 
-    cur.execute('SELECT date, value FROM meter WHERE name=?', (name,))
-    for date, value in cur:
-        yield {'date': date, 'value': value}
+    cur = con.cursor()
+    yield from cur.execute('SELECT * FROM meter WHERE name=?', (name,))
 
     con.close()
 
