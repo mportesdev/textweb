@@ -8,7 +8,10 @@ def get_meter_data(name):
     con.row_factory = sqlite3.Row
 
     cur = con.cursor()
-    yield from cur.execute('SELECT * FROM meter WHERE name=?', (name,))
+    yield from cur.execute('SELECT Meter.date, Meter.height '
+                           'FROM Meter, Person '
+                           'WHERE Meter.person=Person.id AND Person.name=?',
+                           (name,))
 
     con.close()
 

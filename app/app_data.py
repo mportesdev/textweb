@@ -29,11 +29,11 @@ HOMEPAGE_MENU = [
     {
         'url': '/oli/roste',
         'text': 'Oli roste',
-        'display': entries_exist('meter', 'oli'),
+        'display': entries_exist('meter', 'Oli'),
     },
     {
         'url': '/fanda/roste',
         'text': 'Fanda roste',
-        'display': entries_exist('meter', 'fanda'),
+        'display': entries_exist('meter', 'Fanda'),
     },
 ]

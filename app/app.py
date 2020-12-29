@@ -73,10 +73,10 @@ def get_thumbnail(pic_path, long_side=400):
 def meter(name):
 
     def format_item(item):
-        date, value = item['date'], item['value']
-        parsed_date = datetime.strptime(date, '%Y%m%d')
+        date, height = item['date'], item['height']
+        parsed_date = datetime.strptime(date, '%Y-%m-%d')
         return {'date': f'{parsed_date:%-d. %-m. %Y}',
-                'value': f'{value / 10:.1f} cm'}
+                'height': f'{height / 10:.1f} cm'}
 
     title = f'{name.title()} roste'
     data = [format_item(item) for item in meter_data(name)]
@@ -84,6 +84,7 @@ def meter(name):
 
 
 def meter_data(name):
+    name = name.capitalize()
     return sorted(get_meter_data(name), key=lambda entry: entry['date'])
 
 
