@@ -91,4 +91,5 @@ def meter_data(name):
 @application.route('/api/<name>/roste')
 def meter_api(name):
     response.set_header('Content-Type', 'application/json')
-    return json.dumps(meter_data(name))
+    serializable = [dict(row) for row in meter_data(name)]
+    return json.dumps(serializable)
