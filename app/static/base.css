@@ -1,14 +1,18 @@
 body {
     text-align: Center;
     font-size: 20pt;
-    color: Teal;
-    background-color: Pink;
+    color: Gainsboro;
+    background-color: Teal;
 }
 
 a {
     font-weight: Bold;
     text-decoration: None;
-    color: Teal;
+    color: Gainsboro;
+}
+
+a:hover {
+    color: LightCyan;
 }
 
 table {
