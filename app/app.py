@@ -1,12 +1,13 @@
 from datetime import datetime
 import json
 
-from bottle import Bottle, view, static_file, HTTPError, response
+from bottle import Bottle, view, static_file, HTTPError
 from PIL import Image
 
 from app_data import HOMEPAGE_MENU, PICTURE_FILES
 from app_paths import STATIC_PATH, IMG_PATH
 from db_functions import get_meter_data
+from decorators import api_route
 
 application = Bottle()
 
@@ -89,7 +90,7 @@ def meter_data(name):
 
 
 @application.route('/api/<name>/roste')
+@api_route
 def meter_api(name):
-    response.set_header('Content-Type', 'application/json')
     serializable = [dict(row) for row in meter_data(name)]
     return json.dumps(serializable)
