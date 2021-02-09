@@ -89,8 +89,38 @@ def meter_data(name):
     return sorted(get_meter_data(name), key=lambda entry: entry['date'])
 
 
-@application.route('/api/<name>/roste')
+@application.route('/api')
 @api_route
-def meter_api(name):
+def api_base_url():
+    data = {
+        'description': 'Base URL of the API',
+        'available endpoints': ['meter', 'pictures'],
+    }
+    return json.dumps(data)
+
+
+@application.route('/api/meter')
+@api_route
+def api_meter():
+    data = {
+        'description': 'Measurement data',
+        'available endpoints': ['oli', 'fanda'],
+    }
+    return json.dumps(data)
+
+
+@application.route('/api/pictures')
+@api_route
+def api_pictures():
+    data = {
+        'description': 'Pictures and thumbnails',
+        'available endpoints': [],
+    }
+    return json.dumps(data)
+
+
+@application.route('/api/meter/<name>')
+@api_route
+def api_meter_by_name(name):
     serializable = [dict(row) for row in meter_data(name)]
     return json.dumps(serializable)
