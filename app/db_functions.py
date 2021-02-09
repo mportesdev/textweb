@@ -9,8 +9,9 @@ def get_meter_data(name):
 
     cur = con.cursor()
     yield from cur.execute('SELECT Meter.date, Meter.height '
-                           'FROM Meter, Person '
-                           'WHERE Meter.person=Person.id AND Person.name=?',
+                           'FROM Person '
+                           'INNER JOIN Meter ON Meter.person=Person.id '
+                           'WHERE Person.name=?',
                            (name,))
 
     con.close()
