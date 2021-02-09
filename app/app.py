@@ -122,5 +122,5 @@ def api_pictures():
 @application.route('/api/meter/<name>')
 @api_route
 def api_meter_by_name(name):
-    serializable = [dict(row) for row in meter_data(name)]
-    return json.dumps(serializable)
+    data = list(meter_data(name))
+    return json.dumps(data)

@@ -19,11 +19,12 @@ def get_meter_data(name):
     con.row_factory = sqlite3.Row
 
     cur = con.cursor()
-    yield from cur.execute('SELECT Meter.date, Meter.height '
+    for row in cur.execute('SELECT Meter.date, Meter.height '
                            'FROM Person '
                            'INNER JOIN Meter ON Meter.person=Person.id '
                            'WHERE Person.name=?',
-                           (name,))
+                           (name,)):
+        yield dict(row)
 
     con.close()
 
