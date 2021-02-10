@@ -79,14 +79,11 @@ def meter(name):
         return {'date': f'{parsed_date:%-d. %-m. %Y}',
                 'height': f'{height / 10:.1f} cm'}
 
-    title = f'{name.title()} roste'
-    data = [format_item(item) for item in meter_data(name)]
+    name = name.title()
+    title = f'{name} roste'
+    meter_data = sorted(get_meter_data(name), key=lambda entry: entry['date'])
+    data = [format_item(item) for item in meter_data]
     return {'title': title, 'data': data}
-
-
-def meter_data(name):
-    name = name.capitalize()
-    return sorted(get_meter_data(name), key=lambda entry: entry['date'])
 
 
 @application.route('/api')
@@ -122,5 +119,6 @@ def api_pictures():
 @application.route('/api/meter/<name>')
 @api_route
 def api_meter_by_name(name):
-    data = list(meter_data(name))
+    name = name.title()
+    data = sorted(get_meter_data(name), key=lambda entry: entry['date'])
     return json.dumps(data)
