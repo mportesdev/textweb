@@ -1,3 +1,4 @@
+import re
 import sqlite3
 
 from app_paths import DB_PATH
@@ -29,7 +30,20 @@ def get_meter_data(name):
 
 
 def entries_exist(table_name, name):
-    if table_name.casefold() == 'meter':
-        return list(get_meter_data(name)) != []
+    if not re.match(r'^\w+$', table_name, flags=re.ASCII):
+        raise ValueError
 
-    return False
+    col_name = {
+        'Meter': 'person',
+        'Picture': 'author',
+    }.get(table_name)
+
+    sql = f'''
+        SELECT *
+        FROM Person
+        INNER JOIN {table_name} ON {table_name}.{col_name}=Person.id
+        WHERE Person.name=?
+    '''
+
+    result = list(query_db(sql, (name,)))
+    return result != []

@@ -19,21 +19,21 @@ HOMEPAGE_MENU = [
     {
         'url': '/oli/maluje',
         'text': 'Oli maluje',
-        'display': bool(PICTURE_FILES['oli']),
+        'display': entries_exist('Picture', 'Oli'),
     },
     {
         'url': '/fanda/maluje',
         'text': 'Fanda maluje',
-        'display': bool(PICTURE_FILES['fanda']),
+        'display': entries_exist('Picture', 'Fanda'),
     },
     {
         'url': '/oli/roste',
         'text': 'Oli roste',
-        'display': entries_exist('meter', 'Oli'),
+        'display': entries_exist('Meter', 'Oli'),
     },
     {
         'url': '/fanda/roste',
         'text': 'Fanda roste',
-        'display': entries_exist('meter', 'Fanda'),
+        'display': entries_exist('Meter', 'Fanda'),
     },
 ]
