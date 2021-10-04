@@ -33,15 +33,10 @@ def entries_exist(table_name, name):
     if not re.match(r'^\w+$', table_name, flags=re.ASCII):
         raise ValueError
 
-    col_name = {
-        'Meter': 'person',
-        'Picture': 'author',
-    }.get(table_name)
-
     sql = f'''
         SELECT *
         FROM Person
-        INNER JOIN {table_name} ON {table_name}.{col_name}=Person.id
+        INNER JOIN {table_name} ON {table_name}.person=Person.id
         WHERE Person.name=?
     '''
 
