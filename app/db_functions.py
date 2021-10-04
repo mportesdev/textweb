@@ -45,5 +45,9 @@ def entries_exist(table_name, name):
         WHERE Person.name=?
     '''
 
-    result = list(query_db(sql, (name,)))
+    try:
+        result = list(query_db(sql, (name,)))
+    except sqlite3.OperationalError:
+        return False
+
     return result != []
