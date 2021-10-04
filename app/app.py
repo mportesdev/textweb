@@ -50,7 +50,7 @@ def meter(name):
 def api_base_url():
     data = {
         'description': 'Base URL of the API',
-        'available endpoints': ['meter', 'pictures'],
+        'available endpoints': ['meter'],
     }
     return json.dumps(data)
 
@@ -61,16 +61,6 @@ def api_meter():
     data = {
         'description': 'Measurement data',
         'available endpoints': ['oli', 'fanda'],
-    }
-    return json.dumps(data)
-
-
-@application.route('/api/pictures')
-@api_route
-def api_pictures():
-    data = {
-        'description': 'Pictures and thumbnails',
-        'available endpoints': [],
     }
     return json.dumps(data)
 
