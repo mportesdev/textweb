@@ -65,9 +65,15 @@ def api_meter():
     return json.dumps(data)
 
 
-@application.route('/api/meter/add', 'POST')
+@application.route('/api/meter/add', ['GET', 'POST'])
 @api_route
 def api_meter_add():
+    if request.method == 'GET':
+        body = {
+            'description': 'Use this endpoint to add records via POST requests',
+        }
+        return json.dumps(body)
+
     if not token_ok(request.headers.get('token')):
         return 'Incorrect write access token'
 
