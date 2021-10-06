@@ -1,11 +1,11 @@
 from datetime import datetime
 import json
 
-from bottle import Bottle, view, static_file
+from bottle import Bottle, view, static_file, request
 
 from app_data import HOMEPAGE_MENU
 from app_paths import STATIC_PATH
-from db_functions import get_meter_data
+from db_functions import get_meter_data, insert_into_meter
 from decorators import api_route
 
 application = Bottle()
@@ -60,9 +60,35 @@ def api_base_url():
 def api_meter():
     data = {
         'description': 'Measurement data',
-        'available endpoints': ['oli', 'fanda'],
+        'available endpoints': ['oli', 'fanda', 'add'],
     }
     return json.dumps(data)
+
+
+@application.route('/api/meter/add', 'POST')
+@api_route
+def api_meter_add():
+    if not token_ok(request.headers.get('token')):
+        return 'Incorrect write access token'
+
+    if not request.content_type.startswith('application/json'):
+        return 'Content type must be application/json'
+
+    data = request.json
+    if not meter_record_valid(data):
+        return 'Invalid data'
+
+    insert_into_meter(data)
+
+    return 'Record saved to database'
+
+
+def token_ok(token):
+    ...
+
+
+def meter_record_valid(data):
+    ...
 
 
 @application.route('/api/meter/<name>')

@@ -28,6 +28,10 @@ def get_meter_data(name):
         yield dict(row)
 
 
+def insert_into_meter(data):
+    ...
+
+
 def entries_exist(table_name, name):
     if not re.match(r'^\w+$', table_name, flags=re.ASCII):
         raise ValueError
