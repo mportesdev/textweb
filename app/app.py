@@ -1,10 +1,13 @@
+import base64
 from datetime import datetime
 import json
+import hashlib
+import hmac
 
 from bottle import Bottle, view, static_file, request
 
 from app_data import HOMEPAGE_MENU
-from app_paths import STATIC_PATH
+from app_paths import APP_PATH, STATIC_PATH
 from db_functions import get_meter_data, insert_into_meter
 from decorators import api_route
 
@@ -74,7 +77,7 @@ def api_meter_add():
         }
         return json.dumps(body)
 
-    if not token_ok(request.headers.get('token')):
+    if not token_ok(request.headers.get('token', '')):
         return 'Incorrect write access token'
 
     if not request.content_type.startswith('application/json'):
@@ -90,7 +93,9 @@ def api_meter_add():
 
 
 def token_ok(token):
-    ...
+    token_digest = hashlib.sha256(token.encode()).digest()
+    secret_digest = base64.b64decode((APP_PATH / '.digest').read_text())
+    return hmac.compare_digest(token_digest, secret_digest)
 
 
 def meter_record_valid(data):
