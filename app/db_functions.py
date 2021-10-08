@@ -4,11 +4,10 @@ import sqlite3
 from app_paths import DB_PATH
 
 
-def query_db(sql_query, params=()):
-    con = sqlite3.connect(DB_PATH)
-    con.row_factory = sqlite3.Row
-    cur = con.cursor()
-    yield from cur.execute(sql_query, params)
+def query_db(sql_query, params=(), db_path=DB_PATH):
+    with sqlite3.connect(db_path) as con:
+        con.row_factory = sqlite3.Row
+        yield from con.execute(sql_query, params)
     con.close()
 
 
