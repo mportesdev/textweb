@@ -8,7 +8,7 @@ from bottle import Bottle, view, static_file, request
 
 from app_data import HOMEPAGE_MENU
 from app_paths import APP_PATH, STATIC_PATH
-from db_functions import get_meter_data, insert_into_meter
+from db_functions import get_meter_data, insert_into_meter, get_person_names
 from decorators import api_route
 
 application = Bottle()
@@ -99,7 +99,22 @@ def token_ok(token):
 
 
 def meter_record_valid(data):
-    ...
+    if not isinstance(data, dict) or data.keys() != {'name', 'date', 'height'}:
+        return False
+
+    if data['name'] not in list(get_person_names()):
+        return False
+
+    try:
+        datetime.strptime(data['date'], '%Y-%m-%d')
+    except ValueError:
+        return False
+
+    height = data['height']
+    if not isinstance(height, (float, int)) or not 0 < height < 2500:
+        return False
+
+    return True
 
 
 @application.route('/api/meter/<name>')
