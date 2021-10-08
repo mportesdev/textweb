@@ -28,8 +28,16 @@ def get_meter_data(name):
         yield dict(row)
 
 
-def insert_into_meter(data):
-    ...
+def insert_into_meter(data, db_path=DB_PATH):
+    name, date, height = data['name'], data['date'], data['height']
+    sql = 'SELECT id FROM Person WHERE name=?'
+    person_id = next(query_db(sql, (name,), db_path=db_path))['id']
+
+    with sqlite3.connect(db_path) as con:
+        sql = 'INSERT INTO Meter (person, date, height) VALUES (?, ?, ?)'
+        con.execute(sql, (person_id, date, height))
+
+    con.close()
 
 
 def entries_exist(table_name, name):

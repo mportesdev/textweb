@@ -87,7 +87,10 @@ def api_meter_add():
     if not meter_record_valid(data):
         return 'Invalid data'
 
-    insert_into_meter(data)
+    try:
+        insert_into_meter(data)
+    except Exception as err:
+        return f'Error writing to database: {err}'
 
     return 'Record saved to database'
 
