@@ -6,10 +6,10 @@ import hmac
 
 from bottle import Bottle, view, static_file, request
 
-from app.data import HOMEPAGE_MENU
-from app.db_functions import get_meter_data, insert_into_meter, get_person_names
-from app.decorators import api_route
-from app.paths import APP_PATH, STATIC_PATH
+from .data import HOMEPAGE_MENU
+from .db_functions import get_meter_data, insert_into_meter, get_person_names
+from .decorators import api_route
+from .paths import APP_PATH, STATIC_PATH
 
 application = Bottle()
 
