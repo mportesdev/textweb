@@ -1,4 +1,4 @@
-from .db_functions import entries_exist
+from app.db_functions import entries_exist
 
 
 HOMEPAGE_MENU = [

@@ -1,7 +1,7 @@
 import re
 import sqlite3
 
-from .paths import DB_PATH
+from app.paths import DB_PATH
 
 
 def query_db(sql_query, params=(), db_path=DB_PATH):
