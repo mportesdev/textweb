@@ -2,8 +2,9 @@ import base64
 from datetime import datetime
 import hashlib
 import hmac
+from http import HTTPStatus
 
-from bottle import Bottle, view, static_file, request, TEMPLATE_PATH
+from bottle import Bottle, view, static_file, request, TEMPLATE_PATH, HTTPError
 
 from .data import HOMEPAGE_MENU
 from .db_functions import get_meter_data, insert_into_meter, get_person_names
@@ -73,27 +74,27 @@ def api_meter():
 @api_route
 def api_meter_add():
     if request.method == 'GET':
-        body = {
-            'description': 'Use this endpoint to add records via POST requests',
-        }
-        return body
+        return {'description': 'Add records via POST requests'}
 
     if not token_ok(request.headers.get('token', '')):
-        return 'Incorrect write access token'
+        raise HTTPError(HTTPStatus.UNAUTHORIZED,
+                        'Incorrect write access token')
 
     if not request.content_type.startswith('application/json'):
-        return 'Content type must be application/json'
+        raise HTTPError(HTTPStatus.BAD_REQUEST,
+                        'Content type must be application/json')
 
     data = request.json
     if not meter_record_valid(data):
-        return 'Invalid data'
+        raise HTTPError(HTTPStatus.BAD_REQUEST, 'Invalid data')
 
     try:
         insert_into_meter(data)
     except Exception as err:
-        return f'Error writing to database: {err}'
+        raise HTTPError(HTTPStatus.INTERNAL_SERVER_ERROR,
+                        f'Error writing to database: {err}')
 
-    return 'Record saved to database'
+    return {'message': 'Record saved to database'}
 
 
 def token_ok(token):
