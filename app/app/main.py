@@ -1,6 +1,5 @@
 import base64
 from datetime import datetime
-import json
 import hashlib
 import hmac
 
@@ -53,21 +52,21 @@ def meter(name):
 @application.route('/api')
 @api_route
 def api_base_url():
-    data = {
+    body = {
         'description': 'Base URL of the API',
         'available endpoints': ['meter'],
     }
-    return json.dumps(data)
+    return body
 
 
 @application.route('/api/meter')
 @api_route
 def api_meter():
-    data = {
+    body = {
         'description': 'Measurement data',
         'available endpoints': ['oli', 'fanda', 'add'],
     }
-    return json.dumps(data)
+    return body
 
 
 @application.route('/api/meter/add', ['GET', 'POST'])
@@ -77,7 +76,7 @@ def api_meter_add():
         body = {
             'description': 'Use this endpoint to add records via POST requests',
         }
-        return json.dumps(body)
+        return body
 
     if not token_ok(request.headers.get('token', '')):
         return 'Incorrect write access token'
@@ -126,5 +125,5 @@ def meter_record_valid(data):
 @api_route
 def api_meter_by_name(name):
     name = name.title()
-    data = sorted(get_meter_data(name), key=lambda entry: entry['date'])
-    return json.dumps(data)
+    body = sorted(get_meter_data(name), key=lambda entry: entry['date'])
+    return body
