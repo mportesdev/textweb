@@ -37,6 +37,9 @@ def style():
 @view('meter')
 def meter(name):
 
+    def date_key(entry):
+        return datetime.strptime(entry['date'], '%Y-%m-%d')
+
     def format_item(item):
         date, height = item['date'], item['height']
         parsed_date = datetime.strptime(date, '%Y-%m-%d')
@@ -45,7 +48,7 @@ def meter(name):
 
     name = name.title()
     title = f'{name} roste'
-    meter_data = sorted(get_meter_data(name), key=lambda entry: entry['date'])
+    meter_data = sorted(get_meter_data(name), key=date_key)
     data = [format_item(item) for item in meter_data]
     return {'title': title, 'data': data}
 
